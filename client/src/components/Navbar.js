@@ -1,6 +1,7 @@
-import React from 'react'
+import React from 'react';
 import { AuthConsumer, } from "../providers/AuthProvider";
-import { Link, withRouter, } from 'react-router-dom'
+import { Link, withRouter, Redirect, } from 'react-router-dom';
+import styled from 'styled-components';
 
 class Navbar extends React.Component {
 
@@ -9,20 +10,26 @@ class Navbar extends React.Component {
 
         if (user) {
             return (
-                <nav>
-                    <ul>
-                        <li onClick={() => handleLogout(this.props.history)} ><Link to='/'>Log Out</Link></li>
-                    </ul>
-                </nav>
+                <>
+                    <Redirect to='/user/page' />
+                    <StyledNav>
+                        <StyledUl>
+                            <StyledLi onClick={() => handleLogout(this.props.history)} ><StyledA as={Link} to='/'>Sign out</StyledA></StyledLi>
+                        </StyledUl>
+                    </StyledNav>
+                </>
             )
         } else {
             return (
-                <nav>
-                    <ul>
-                        <li><Link to='login' >Login</Link></li>
-                    </ul>
-                    <li><Link to='/register'>Register</Link></li>
-                </nav>
+                <>
+                    <Redirect to='/' />
+                    <StyledNav>
+                        <StyledUl>
+                            <StyledLi><StyledA as={Link} to='login' >Login</StyledA></StyledLi>
+                            <StyledLi><StyledA as={Link} to='/register'>Sign up</StyledA></StyledLi>
+                        </StyledUl>
+                    </StyledNav>
+                </>
             )
         }
     }
@@ -30,10 +37,10 @@ class Navbar extends React.Component {
     render() {
         return (
             <div>
-                <nav>
-                    <Link to='/'>Home</Link>
+                <StyledNav>
+                    <StyledA as={Link} to='/'>Logo</StyledA>
                     {this.rightNavItems()}
-                </nav>
+                </StyledNav>
             </div>
         )
     }
@@ -52,3 +59,32 @@ export class ConnectedNavbar extends React.Component {
 }
 
 export default withRouter(ConnectedNavbar);
+
+const StyledNav = styled.nav`
+    background: grey;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+`
+
+const StyledUl = styled.ul`
+list-style: none;
+text-align: center;
+display: inline;
+`
+
+const StyledLi = styled.li`
+display: inline;
+margin: 0px 15px;
+`
+
+const StyledA = styled.a`
+color: white;
+text-decoration: none;
+transition: 0.3s all ease-in-out;
+
+&:hover {
+    color: black;
+    transition: 0.3s all ease-in-out;
+}
+`

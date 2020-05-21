@@ -7,21 +7,30 @@ import Register from './components/Register';
 import { Switch, Route, } from 'react-router-dom';
 import FetchUser from './components/FetchUser';
 import ProtectedRoute from './components/ProtectedRoute';
+import UserPage from './components/UserPage';
+import styled from 'styled-components';
 
 const App = () => (
   <>
     <Navbar />
     <FetchUser>
-      <div>
+      <Container>
         <Switch>
-          <ProtectedRoute exact path="/" component={Home} />
+          <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
+          <ProtectedRoute exact path="/user/page" component={UserPage} />
           <Route component={NoMatch} />
         </Switch>
-      </div>
+      </Container>
     </FetchUser>
   </>
 )
 
 export default App;
+
+const Container = styled.div`
+margin: 40px;
+`
+
+
