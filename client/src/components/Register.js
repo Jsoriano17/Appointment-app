@@ -2,15 +2,15 @@ import React from 'react';
 import { AuthConsumer, } from "../providers/AuthProvider";
 
 class Register extends React.Component {
-    state = { email: '', password: '', passwordConfirmation: '', };
+    state = { email: '', password: '', passwordConfirmation: '', first_name: '', last_name: '', };
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const { email, password, passwordConfirmation } = this.state;
+        const { email, password, passwordConfirmation, first_name, last_name } = this.state;
         const { auth: { handleRegister, }, history, } = this.props;
 
         if (password === passwordConfirmation)
-            handleRegister({ email, password, passwordConfirmation, }, history);
+            handleRegister({ email, password, passwordConfirmation, first_name, last_name }, history);
         else
             alert('Passwords Do Not Match!')
     }
@@ -21,12 +21,30 @@ class Register extends React.Component {
     }
 
     render() {
-        const { email, password, passwordConfirmation, } = this.state;
+        const { email, password, passwordConfirmation, first_name, last_name } = this.state;
 
         return (
             <>
                 <h1>Register</h1>
                 <form onSubmit={this.handleSubmit}>
+                    <input
+                        label="First Name"
+                        required
+                        autoFocus
+                        name='first_name'
+                        value={first_name}
+                        placeholder='First Name'
+                        onChange={this.handleChange}
+                    />
+                    <input
+                        label="Last Name"
+                        required
+                        autoFocus
+                        name='last_name'
+                        value={last_name}
+                        placeholder='Last Name'
+                        onChange={this.handleChange}
+                    />
                     <input
                         label="Email"
                         required
