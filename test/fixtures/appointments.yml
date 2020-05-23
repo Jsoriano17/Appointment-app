@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2020-05-23
+  start_time: 2020-05-23 03:11:37
+  end_time: 2020-05-23 03:11:37
+  availability: false
+  amount_of_people: 1
+  user: one
+  employee: one
+
+two:
+  date: 2020-05-23
+  start_time: 2020-05-23 03:11:37
+  end_time: 2020-05-23 03:11:37
+  availability: false
+  amount_of_people: 1
+  user: two
+  employee: two
