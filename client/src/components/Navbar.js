@@ -68,23 +68,23 @@ const StyledNav = styled.nav`
 `
 
 const StyledUl = styled.ul`
-list-style: none;
-text-align: center;
-display: inline;
+    list-style: none;
+    text-align: center;
+    display: inline;
 `
 
 const StyledLi = styled.li`
-display: inline;
-margin: 0px 15px;
+    display: inline;
+    margin: 0px 15px;
 `
 
 const StyledA = styled.a`
-color: white;
-text-decoration: none;
-transition: 0.3s all ease-in-out;
-
-&:hover {
-    color: black;
+    color: white;
+    text-decoration: none;
     transition: 0.3s all ease-in-out;
-}
+
+    &:hover {
+        color: black;
+        transition: 0.3s all ease-in-out;
+    }
 `
