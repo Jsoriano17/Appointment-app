@@ -1,6 +1,6 @@
 class Api::HostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_hosts, :only [:show, ]
+  before_action :set_hosts, only: [:show, :update, :destroy ]
 
   def index
     render json: current_user.hosts.all
@@ -26,7 +26,7 @@ class Api::HostsController < ApplicationController
 
   def destroy
     @host.destroy
-    render json: { message: 'Location deleted.' }
+    render json: { message: 'Location deleted' }
   end
 
   private

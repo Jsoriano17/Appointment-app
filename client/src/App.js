@@ -9,6 +9,7 @@ import FetchUser from './components/FetchUser';
 import ProtectedRoute from './components/ProtectedRoute';
 import UserPage from './components/UserPage';
 import styled from 'styled-components';
+import HostForm from './components/forms/HostForm';
 
 const App = () => (
   <>
@@ -20,6 +21,7 @@ const App = () => (
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <ProtectedRoute exact path="/user/page" component={UserPage} />
+          <ProtectedRoute exact path="/host/form" component={HostForm} />
           <Route component={NoMatch} />
         </Switch>
       </Container>
