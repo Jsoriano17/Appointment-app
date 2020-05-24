@@ -11,7 +11,6 @@ class Navbar extends React.Component {
         if (user) {
             return (
                 <>
-                    <Redirect to='/user/page' />
                     <StyledNav>
                         <StyledUl>
                             <StyledLi onClick={() => handleLogout(this.props.history)} ><StyledA as={Link} to='/'>Sign out</StyledA></StyledLi>
@@ -25,8 +24,8 @@ class Navbar extends React.Component {
                     <Redirect to='/' />
                     <StyledNav>
                         <StyledUl>
-                            <StyledLi><StyledA as={Link} to='login' >Login</StyledA></StyledLi>
                             <StyledLi><StyledA as={Link} to='/register'>Sign up</StyledA></StyledLi>
+                            <StyledLi><StyledA as={Link} to='login' >Login</StyledA></StyledLi>
                         </StyledUl>
                     </StyledNav>
                 </>

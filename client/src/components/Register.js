@@ -1,11 +1,18 @@
 import React from 'react';
 import { AuthConsumer, } from "../providers/AuthProvider";
+import { Form, Input, Button, Checkbox } from 'antd';
+const layout = {
+    labelCol: { span: 8 },
+    wrapperCol: { span: 16 },
+};
+const tailLayout = {
+    wrapperCol: { offset: 8, span: 16 },
+};
 
 class Register extends React.Component {
     state = { email: '', password: '', passwordConfirmation: '', first_name: '', last_name: '', };
 
     handleSubmit = (e) => {
-        e.preventDefault();
         const { email, password, passwordConfirmation, first_name, last_name } = this.state;
         const { auth: { handleRegister, }, history, } = this.props;
 
@@ -25,55 +32,55 @@ class Register extends React.Component {
 
         return (
             <>
-                <h1>Register</h1>
-                <form onSubmit={this.handleSubmit}>
-                    <input
-                        label="First Name"
-                        required
-                        autoFocus
-                        name='first_name'
-                        value={first_name}
-                        placeholder='First Name'
-                        onChange={this.handleChange}
-                    />
-                    <input
-                        label="Last Name"
-                        required
-                        autoFocus
-                        name='last_name'
-                        value={last_name}
-                        placeholder='Last Name'
-                        onChange={this.handleChange}
-                    />
-                    <input
-                        label="Email"
-                        required
-                        autoFocus
-                        name='email'
-                        value={email}
-                        placeholder='Email'
-                        onChange={this.handleChange}
-                    />
-                    <input
-                        label="Password"
-                        required
-                        name='password'
-                        value={password}
-                        placeholder='Password'
-                        type='password'
-                        onChange={this.handleChange}
-                    />
-                    <input
-                        label="Password Confirmation"
-                        required
-                        name='passwordConfirmation'
-                        value={passwordConfirmation}
-                        placeholder='Password Confirmation'
-                        type='password'
-                        onChange={this.handleChange}
-                    />
-                    <button type='submit'>Submit</button>
-                </form>
+                <h1>Sign Up</h1>
+                <Form
+                    {...layout}
+                    onFinish={this.handleSubmit}
+                >
+                    <Form.Item label="First Name" name="first_name" rules={[{ required: true, message: 'Please input your first name!' }]}>
+                        <Input
+                            name="first_name"
+                            value={first_name}
+                            placeholder='First Name'
+                            onChange={this.handleChange} />
+                    </Form.Item>
+
+                    <Form.Item label="Last Name" name="last_name" rules={[{ required: true, message: 'Please input your last name!' }]}>
+                        <Input
+                            name="last_name"
+                            value={last_name}
+                            placeholder='Last Name'
+                            onChange={this.handleChange} />
+                    </Form.Item>
+
+                    <Form.Item label="Email" name="email" rules={[{ required: true, message: 'Please input your email!' }]}>
+                        <Input
+                            name="email"
+                            value={email}
+                            placeholder='Email'
+                            onChange={this.handleChange} />
+                    </Form.Item>
+
+                    <Form.Item label="Password"  name="password" rules={[{ required: true, message: 'Please input your password!' }]}>
+                        <Input.Password
+                            name="password"
+                            value={password}
+                            placeholder='Password'
+                            onChange={this.handleChange} />
+                    </Form.Item>
+
+                    <Form.Item label="Password Confirmation" name="passwordConfirmation" rules={[{ required: true, message: 'Passwords do not match!' }]} >
+                        <Input.Password
+                            name="passwordConfirmation"
+                            value={passwordConfirmation}
+                            placeholder='Password Confirmation'
+                            onChange={this.handleChange} />
+                    </Form.Item>
+
+                    <Form.Item {...tailLayout}>
+                        <Button type='primary' htmlType="submit">Submit</Button>
+                    </Form.Item>
+                </Form>
             </>
         )
     }

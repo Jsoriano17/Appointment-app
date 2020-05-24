@@ -1,11 +1,18 @@
 import React from 'react';
 import { AuthConsumer, } from "../providers/AuthProvider";
+import { Form, Input, Button, Checkbox } from 'antd';
+const layout = {
+    labelCol: { span: 8 },
+    wrapperCol: { span: 16 },
+  };
+  const tailLayout = {
+    wrapperCol: { offset: 8, span: 16 },
+  };
 
 class Login extends React.Component {
     state = { email: '', password: '' }
 
     handleSubmit = (e) => {
-        e.preventDefault();
         const { email, password, } = this.state;
         this.props.auth.handleLogin({ email, password, }, this.props.history);
     }
@@ -21,27 +28,45 @@ class Login extends React.Component {
         return (
             <>
                 <h1>Login</h1>
-                <form onSubmit={this.handleSubmit}>
-                    <input
-                        label="Email"
-                        autoFocus
-                        required
-                        name='email'
-                        value={email}
-                        placeholder='Email'
-                        onChange={this.handleChange}
-                    />
-                    <input
+                <Form
+                    {...layout}
+                    name="basic"
+                    initialValues={{ remember: true }}
+                    onFinish={this.handleSubmit}
+                >
+                    <Form.Item
+                        label="Username"
+                        name="username"
+                        rules={[{ required: true, message: 'Please input your username!' }]}
+                    >
+                        <Input
+                            autoFocus
+                            name='email'
+                            value={email}
+                            placeholder='Email'
+                            onChange={this.handleChange} />
+                    </Form.Item>
+
+                    <Form.Item
                         label="Password"
-                        required
-                        name='password'
-                        value={password}
-                        placeholder='Password'
-                        type='password'
-                        onChange={this.handleChange}
-                    />
-                    <button type='submit'>Submit</button>
-                </form>
+                        name="password"
+                        rules={[{ required: true, message: 'Please input your password!' }]}
+                    >
+                        <Input.Password
+                            name='password'
+                            value={password}
+                            placeholder='Password'
+                            onChange={this.handleChange} />
+                    </Form.Item>
+
+                    <Form.Item {...tailLayout} name="remember" valuePropName="checked">
+                        <Checkbox>Remember me</Checkbox>
+                    </Form.Item>
+
+                    <Form.Item {...tailLayout}>
+                        <Button type="primary" htmlType="submit">Submit</Button>
+                    </Form.Item>
+                </Form>
             </>
         )
     }
