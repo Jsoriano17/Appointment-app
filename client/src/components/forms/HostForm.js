@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import { Form, Input, Button, Checkbox } from 'antd';
+import Dropzone from 'react-dropzone';
+
 const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
@@ -11,24 +13,14 @@ const tailLayout = {
 
 
 export default class HostForm extends React.Component {
-    state = { name: '', open: '', closed: '', weekdays: '', phone: '', street_address: '', city: '', state: '', zip: '', country: '', img: '', }
+    state = { name: '', open: '', closed: '', weekdays: '', phone: '', street_address: '', city: '', state: '', zip: '', country: '', img: '', file: null, }
 
     handleSubmit = () => {
-        const newHost = {...this.state}
-        // let data = new FormData();
-        // const { file } = this.state
-        // console.log('file: submit', file)
-        // data.append("file", file);
-        // const {
-        //   address,
-        //   zip_code,
-        //   square_footage,
-        //   lot_size,
-        //   purchase_date,
-        //   purchase_price,
-        // } = this.state
-        console.log(newHost)
-        axios.post(`/api/hosts`, newHost).then((res) => {
+        let data = new FormData();
+        const { file } = this.state
+        console.log('file: submit', file)
+        data.append("file", file);
+        axios.post(`/api/hosts`, data).then((res) => {
             console.log(res);
             this.setState({
                 name: '',
@@ -44,7 +36,7 @@ export default class HostForm extends React.Component {
                 img: '',
             });
             return window.location.replace("/user/page")
-        } )
+        })
             .catch((err) => {
                 console.log(err);
             });
@@ -54,6 +46,11 @@ export default class HostForm extends React.Component {
         const { name, value, } = e.target;
         this.setState({ [name]: value, });
     }
+
+    onDrop = (files) => {
+        console.log('files[0]', files[0])
+        this.setState({ file: files[0] })
+      };
 
 
     render() {
@@ -77,7 +74,7 @@ export default class HostForm extends React.Component {
                     initialValues={{ remember: true }}
                     onFinish={this.handleSubmit} >
 
-                    <Form.Item  label="Host Name" name="name" rules={[{ required: true, message: 'Please input a host name!' }]}>
+                    <Form.Item label="Host Name" name="name" rules={[{ required: true, message: 'Please input a host name!' }]}>
                         <Input
                             autoFocus
                             name='name'
@@ -122,7 +119,7 @@ export default class HostForm extends React.Component {
                             onChange={this.handleChange}
                         />
                     </Form.Item>
-                    
+
                     <Form.Item label="Street Address" name="street_address" rules={[{ required: true, message: 'Please input an address' }]}>
                         <Input
                             name='street_address'
@@ -168,14 +165,16 @@ export default class HostForm extends React.Component {
                         />
                     </Form.Item>
 
-                    <Form.Item label="Img" name="Img" rules={[{ required: true, message: 'Please input a img' }]}>
-                        <Input
-                            name='img'
-                            value={img}
-                            placeholder='Img'
-                            onChange={this.handleChange}
-                        />
-                    </Form.Item>
+                    <Dropzone onDrop={this.onDrop} multiple={false}>
+                        {({ getRootProps, getInputProps }) => (
+                            <div>
+                                <div {...getRootProps()}>
+                                    <input {...getInputProps()} />
+                                    <p>Drag or drop a picture of your home</p>
+                                </div>
+                            </div>
+                        )}
+                    </Dropzone>
 
                     <Form.Item {...tailLayout}>
                         <Button type="primary" htmlType="submit">Submit</Button>
