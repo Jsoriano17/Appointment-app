@@ -10,6 +10,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import UserPage from './components/UserPage';
 import styled from 'styled-components';
 import HostForm from './components/forms/HostForm';
+import HostShow from './components/HostShow';
 
 const App = () => (
   <>
@@ -22,6 +23,7 @@ const App = () => (
           <Route exact path="/register" component={Register} />
           <ProtectedRoute exact path="/user/page" component={UserPage} />
           <ProtectedRoute exact path="/host/form" component={HostForm} />
+          <ProtectedRoute exact path="/host/show" component={HostShow} />
           <Route component={NoMatch} />
         </Switch>
       </Container>

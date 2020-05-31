@@ -39,6 +39,8 @@ export default class HostForm extends React.Component {
         })
             .catch((err) => {
                 console.log(err);
+                alert('Something went wrong please try again later')
+                return window.location.replace("/user/page")
             });
     };
 
@@ -170,7 +172,7 @@ export default class HostForm extends React.Component {
                             <div>
                                 <div {...getRootProps()}>
                                     <input {...getInputProps()} />
-                                    <p>Drag or drop a picture of your home</p>
+                                    <p>Drag or drop a picture of your company</p>
                                 </div>
                             </div>
                         )}

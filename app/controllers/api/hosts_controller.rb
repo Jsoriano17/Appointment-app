@@ -1,6 +1,6 @@
 class Api::HostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_hosts, only: [:show, :update, :destroy ]
+  before_action :set_host, only: [:show, :edit, :destroy, :update]
 
   def index
     render json: current_user.hosts.all
