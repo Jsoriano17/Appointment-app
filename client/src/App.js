@@ -11,6 +11,8 @@ import UserPage from './components/UserPage';
 import styled from 'styled-components';
 import HostForm from './components/forms/HostForm';
 import HostShow from './components/HostShow';
+import EmployeeForm from './components/forms/EmployeeForm';
+import EmployeePage from './components/EmployeePage';
 
 const App = () => (
   <>
@@ -24,6 +26,9 @@ const App = () => (
           <ProtectedRoute exact path="/user/page" component={UserPage} />
           <ProtectedRoute exact path="/host/form" component={HostForm} />
           <ProtectedRoute exact path="/host/show" component={HostShow} />
+          <ProtectedRoute exact path="/employee/form" component={EmployeeForm} />
+          <ProtectedRoute exact path="/employee/page" component={EmployeePage} />
+          {/* <ProtectedRoute exact path="/schedule/appointment" component={ScheduleAppointment} /> */}
           <Route component={NoMatch} />
         </Switch>
       </Container>

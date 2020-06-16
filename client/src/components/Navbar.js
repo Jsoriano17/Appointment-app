@@ -15,6 +15,8 @@ class Navbar extends React.Component {
                     <StyledNav>
                         <StyledUl>
                             <StyledLi onClick={() => handleLogout(this.props.history)} ><StyledA as={Link} to='/'>Sign out</StyledA></StyledLi>
+                            <StyledLi onClick={() => window.location.replace("/user/page")} ><StyledA as={Link} to='/'>User Page</StyledA></StyledLi>
+                            <StyledLi onClick={() => window.location.replace("/schedule/appointment")} ><StyledA as={Link} to='/'>Schedule Appointment</StyledA></StyledLi>
                         </StyledUl>
                     </StyledNav>
                 </>
