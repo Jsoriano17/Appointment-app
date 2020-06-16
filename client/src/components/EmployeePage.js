@@ -3,9 +3,9 @@ import axios from 'axios';
 
 const EmployeePage = (props) => {
     const [employee, setEmployee] = useState({});
-    const {id} = props.location
+    const {id, hostId} = props.location
 
-    useEffect( () => {axios.get(`/api/hosts/1/employees/${id}`).then(res => {
+    useEffect( () => {axios.get(`/api/hosts/${hostId}/employees/${id}`).then(res => {
         setEmployee(res.data)
     }).catch(err => {
         console.log(err)
